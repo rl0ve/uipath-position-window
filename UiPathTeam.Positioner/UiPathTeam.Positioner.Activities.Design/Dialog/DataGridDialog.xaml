@@ -38,7 +38,6 @@
                 BorderBrush="Gray"
                 ClipToBounds="True"
                 CanUserDeleteRows="False"
-                SourceUpdated="dgSimple_SourceUpdated"
                 IsSynchronizedWithCurrentItem="True"
                 Loaded="dgSimple_Loaded" 
                 >
