@@ -1,0 +1,58 @@
+﻿<sap:WorkflowElementDialog x:Class="UiPathTeam.Positioner.Activities.Design.DataGridDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Set Position"
+    Width="196"
+    Height="132"
+    WindowResizeMode="NoResize">
+    <DockPanel LastChildFill="False">
+        <Grid DockPanel.Dock="Top" Margin="0,10,0,0">
+            <DataGrid 
+                Name="dgSimple"
+                Height="112" 
+                Width="196"
+                RowHeight="18"
+                ColumnWidth="32" 
+                BorderThickness="2"
+                Margin="0" 
+                HorizontalAlignment="Center"
+                HorizontalContentAlignment="Center"
+                TextBlock.TextAlignment="Center"
+                VerticalAlignment="Center"
+                SelectionUnit="Cell"
+                IsReadOnly="True"
+                HeadersVisibility="None" 
+                SelectiveScrollingGrid.SelectiveScrollingOrientation="None"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                ScrollViewer.CanContentScroll="False"
+                ScrollViewer.PanningMode="None"
+                CanUserResizeColumns="False"
+                CanUserResizeRows="False"
+                CanUserAddRows="False"
+                CanUserSortColumns="False" 
+                CanUserReorderColumns="False"
+                HorizontalGridLinesBrush="Gray"
+                VerticalGridLinesBrush="Gray"
+                BorderBrush="Gray"
+                ClipToBounds="True"
+                CanUserDeleteRows="False"
+                SourceUpdated="dgSimple_SourceUpdated"
+                IsSynchronizedWithCurrentItem="True"
+                Loaded="dgSimple_Loaded" 
+                >
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" >
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightSteelBlue"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</sap:WorkflowElementDialog>

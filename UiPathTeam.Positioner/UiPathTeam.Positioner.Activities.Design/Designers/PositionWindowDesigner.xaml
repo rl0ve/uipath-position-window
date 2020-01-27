@@ -1,0 +1,80 @@
+﻿<sap:ActivityDesigner x:Class="UiPathTeam.Positioner.Activities.Design.PositionWindowDesigner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+             xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+             xmlns:p="clr-namespace:UiPathTeam.Positioner.Activities.Design.Properties"
+             xmlns:controls="clr-namespace:UiPath.Shared.Activities.Design.Controls"   
+             xmlns:converters="clr-namespace:UiPath.Shared.Activities.Design.Converters">
+
+    <sap:ActivityDesigner.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Themes\Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:ActivityIconConverter x:Key="ActivityIconConverter" />
+        </ResourceDictionary>
+    </sap:ActivityDesigner.Resources>
+    <sap:ActivityDesigner.Icon>
+        <DrawingBrush>
+            <DrawingBrush.Drawing>
+                <ImageDrawing>
+                    <ImageDrawing.Rect>
+                        <Rect Location="0,0" Size="16,16" ></Rect>
+                    </ImageDrawing.Rect>
+                    <ImageDrawing.ImageSource>
+                        <BitmapImage UriSource="gridIcon.png" ></BitmapImage>
+                    </ImageDrawing.ImageSource>
+                </ImageDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </sap:ActivityDesigner.Icon>
+
+    <controls:ActivityDecoratorControl Style="{StaticResource ActivityDecoratorStyle}">
+
+        <DockPanel LastChildFill="False">
+        <Button Height="23" Content="Set Position" DockPanel.Dock="Left" Margin="6,0,0,0" HorizontalAlignment="Left" Click="Button_Click" />
+        <Border Height ="29" Width="50" DockPanel.Dock="Right" BorderBrush="LightGray" BorderThickness="1" CornerRadius="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <DataGrid
+                        Name="designerGrid" 
+                        Width="48"
+                        RowHeight="4.5"
+                        ColumnWidth="8" 
+                        BorderThickness="0"
+                        HorizontalContentAlignment="Center"
+                        SelectionUnit="Cell"
+                        IsReadOnly="True"
+                        HeadersVisibility="None" 
+                        SelectiveScrollingGrid.SelectiveScrollingOrientation="None"
+                        ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                        ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                        ScrollViewer.CanContentScroll="False"
+                        ScrollViewer.PanningMode="None"
+                        CanUserResizeColumns="False"
+                        CanUserResizeRows="False"
+                        CanUserAddRows="False"
+                        CanUserSortColumns="False" 
+                        CanUserReorderColumns="False" 
+                        HorizontalGridLinesBrush="LightGray" 
+                        VerticalGridLinesBrush="LightGray" 
+                        BorderBrush="LightGray" 
+                        ClipToBounds="True" 
+                        CanUserDeleteRows="False" 
+                        IsHitTestVisible="False" 
+                        MinColumnWidth="0" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="27" VerticalAlignment="Center" Loaded="designerGrid_Loaded"
+                        >
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" >
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="DarkGray"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+        </Border>
+    </DockPanel>
+</controls:ActivityDecoratorControl>
+</sap:ActivityDesigner>
