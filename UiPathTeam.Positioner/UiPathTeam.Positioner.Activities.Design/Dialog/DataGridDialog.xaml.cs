@@ -21,6 +21,7 @@ namespace UiPathTeam.Positioner.Activities.Design
         public DataGrid myDesignerGrid { get; set; }
         public new EditingContext Context { get; set; }
 
+        // Setup the grid that will be used for selection in the pop-up dialog
         public DataGridDialog(ModelItem modelItem, DataGrid designerGrid)
         {
             InitializeComponent();
@@ -43,12 +44,7 @@ namespace UiPathTeam.Positioner.Activities.Design
             this.myDesignerGrid = designerGrid;
         }
 
-
-        private void dgSimple_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
-        {
-            Console.WriteLine("source is being updated");
-        }
-
+        // Setup helper method used to obtain literal values from ModelItem
         public static int GetImmediateValue(InArgument<int> argument)
         {
             Activity myActivity = argument.Expression;
@@ -57,6 +53,7 @@ namespace UiPathTeam.Positioner.Activities.Design
             return myLiteral.Value;
         }
 
+        // Whenever the pop-up is loaded, show the correct cells selected (i.e., highlighted) based on the current InArguments
         private void dgSimple_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -87,6 +84,7 @@ namespace UiPathTeam.Positioner.Activities.Design
             }
         }
 
+        // On close, set the InArgument Values, for whatever cells were selected
         protected override void OnWorkflowElementDialogClosed(bool? dialogResult)
         {
             if (dialogResult.Value == true)
@@ -106,6 +104,7 @@ namespace UiPathTeam.Positioner.Activities.Design
                     myDesignerGrid.SelectedCells.Add(myCell);
                 }
 
+                // Set the InArguments according to min/max values of what was selected in the grid
                 startingX = xValues.Min();
                 startingY = yValues.Min();
                 endingX = xValues.Max();
@@ -117,36 +116,9 @@ namespace UiPathTeam.Positioner.Activities.Design
                 ModelItem.Properties["LastY"].SetValue(new InArgument<int>(endingY));
             }
         }
-
-        //private void OK_Click(object sender, RoutedEventArgs e)
-        //{
-        //    IList<DataGridCellInfo> selectedCells = dgSimple.SelectedCells;
-        //    List<int> xValues = new List<int>();
-        //    List<int> yValues = new List<int>();
-
-        //    myDesignerGrid.UnselectAllCells();
-
-        //    foreach (DataGridCellInfo cell in selectedCells)
-        //    {
-        //        xValues.Add(cell.Column.DisplayIndex);
-        //        yValues.Add(dgSimple.Items.IndexOf(cell.Item));
-
-        //        DataGridCellInfo myCell = new DataGridCellInfo(myDesignerGrid.Items[dgSimple.Items.IndexOf(cell.Item)], myDesignerGrid.Columns[cell.Column.DisplayIndex]);
-        //        myDesignerGrid.SelectedCells.Add(myCell);
-        //    }
-
-        //    startingX = xValues.Min();
-        //    startingY = yValues.Min();
-        //    endingX = xValues.Max();
-        //    endingY = yValues.Max();
-
-        //    ModelItem.Properties["FirstX"].SetValue(new InArgument<int>(startingX));
-        //    ModelItem.Properties["FirstY"].SetValue(new InArgument<int>(startingY));
-        //    ModelItem.Properties["LastX"].SetValue(new InArgument<int>(endingX));
-        //    ModelItem.Properties["LastY"].SetValue(new InArgument<int>(endingY));
-        //}
     }
 
+    // Setup a class specifying the columns for the grid in the pop-up dialog
     public class GridRow
     {
         public string Column1 { get; set; }

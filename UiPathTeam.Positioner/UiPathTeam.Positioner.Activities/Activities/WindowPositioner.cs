@@ -22,10 +22,6 @@ namespace UiPathTeam.Positioner.Activities
         protected int columnBegin;
         protected int columnFinal;
 
-        //[LocalizedCategoryAttribute("Input")]
-        //[LocalizedDisplayNameAttribute("Window")]
-        //public InArgument<Window> Window { get; set; }
-
         [Browsable(false)]
         [LocalizedCategory(nameof(Resources.Input))]
         [RequiredArgument]
@@ -97,7 +93,7 @@ namespace UiPathTeam.Positioner.Activities
                 var startingX = 1;
                 var startingY = 1;
 
-                // Set the starting and ending points (this logic allows for selections where the columnBegin is greater than the ColumnFinal)
+                // Set the starting and ending points (this logic allows for selections where the columnBegin is greater than the ColumnFinal. Only applicable if Input Arguments become browsable)
                 if (columnBegin == 1)
                 {
                     startingX = 0;
@@ -115,7 +111,7 @@ namespace UiPathTeam.Positioner.Activities
                     startingX = ((screenWidth / grid) * (columnFinal - 1));
                 }
 
-                // Set the starting and ending points (this logic allows for selections where the RowBegin is greater than the RowFinal)
+                // Set the starting and ending points (this logic allows for selections where the RowBegin is greater than the RowFinal. Only Applicable if Input Arguments Become Browsable)
                 if (rowBegin == 1)
                 {
                     startingY = 0;
@@ -136,24 +132,6 @@ namespace UiPathTeam.Positioner.Activities
                 // Set the Width and Height of the new Screen
                 var windowWidth = (Math.Abs(columnFinal - columnBegin) + 1) * (screenWidth / grid);
                 var windowHeight = (Math.Abs(rowFinal - rowBegin) + 1) * (screenHeight / grid);
-
-
-                //if (windowWidth == 0)
-                //{
-                //    windowWidth = position.Rectangle.Value.Width;
-                //}
-                //if (windowHeight == 0)
-                //{
-                //    windowHeight = position.Rectangle.Value.Height;
-                //}
-                //if (startingX == 0)
-                //{
-                //    startingX = position.Rectangle.Value.Left;
-                //}
-                //if (startingY == 0)
-                //{
-                //    startingY = position.Rectangle.Value.Top;
-                //}
 
                 int myBorderThickness = windowBorderThickness(window.Handle);
                 window.Move(startingX - myBorderThickness, startingY, windowWidth + 2 * myBorderThickness, windowHeight + myBorderThickness);
